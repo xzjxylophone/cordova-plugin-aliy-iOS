@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+	xmlns:android="http://schemas.android.com/apk/res/android" id="com.justep.cordova.plugin.alipay"
+	version="5.3.0">
+	<name>Alipay</name>
+	<engines>
+		<engine name="cordova" version=">=3.5.0" />
+	</engines>
+
+	<js-module src="www/alipay.js" name="alipay">
+		<clobbers target="navigator.alipay" />
+	</js-module>
+
+	<!-- android -->
+	<platform name="android">
+
+		<source-file
+			src="src/android/com/justep/cordova/plugin/alipay/Alipay.java"
+			target-dir="src/com/justep/cordova/plugin/alipay" />
+		<source-file
+			src="src/android/com/justep/cordova/plugin/alipay/Base64.java"
+			target-dir="src/com/justep/cordova/plugin/alipay" />
+		<source-file
+			src="src/android/com/justep/cordova/plugin/alipay/Result.java"
+			target-dir="src/com/justep/cordova/plugin/alipay" />
+		<source-file
+			src="src/android/com/justep/cordova/plugin/alipay/SignUtils.java"
+			target-dir="src/com/justep/cordova/plugin/alipay" />
+
+		<source-file src="src/android/alipaysdk.jar" target-dir="libs" />
+		<source-file src="src/android/alipaysecsdk.jar"
+			target-dir="libs" />
+		<source-file src="src/android/alipayutdid.jar" target-dir="libs" />
+
+		<config-file target="res/xml/config.xml" parent="/*">
+			<preference name="partner" value="2088811446024912" />
+			<preference name="rsa_private"
+			                value="MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAM3NsYcFbce3omzhiXY1Mr8nkxuHkpVFky9JBb+vnLzje+mjZIxbHDGIU//3c88H5F6CO6CPNMa036QJ9nhS6Ea7xmEGQ2JxY0JMM2bnQxhRtwwe1nV67boFzkjrOWD1loThzK3pgVkb6D6gLqANXcPSe3JAqrvouNUYvK/+75O1AgMBAAECgYBy3IdlZUlE+x+DB0lyGPTOrSa0abEM8LzZ2jaEKl4fKhOBbXjzwPH2TzEaniAbfzsc6DChRuvcrxxWcF0IALWzqyJdGNxZjlhwyVhKc4BJnn90AUXohvB83AFd2+cHurHkAE8sEO8ihDsSOon0YpKKkA/haQ8RKshTCO8RZIlugQJBAP2WkR3BbPzgHZxKR8u0woe0ZzIkUCa/+dMr8XELE6ZBj1w3uPTq4ePHto5W9MLwzN3p3lN+WcUkAM/BdzlbUyECQQDPwsf4SYCjV5hTNY7sj1sqcO4O8Ti7HnINHkefb90TsIrQjaBYNYxeEjj028yLxKkNkNUoLZQekt0jDast24IVAkBDvM5yplJYkf0W3HilH1m/Kh9Os4h9cVZoZBqQWaccB/MlbPUI5x0D3TsUdoHW+L+gn3H115BfKqjU1hbkyVJBAkEAryckVTMKayrG9aeahd7Z2e75E8nTrRUey+ZyNX0mYZodfXNY8eS7IPe14uCHEnJKn3Ax9DxwulHQcuPsI64CfQJBAPYgBMhCX6HXpLTKUuIID1dy1ENZyEEUZCouQsuPYwirOO6z4NIi8wSa98wgM0/2NJrVs1W2/l2fn8xVycd4Ykk=" />
+			<preference name="rsa_public"
+			                value="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCnxj/9qwVfgoUh/y2W89L6BkRAFljhNhgPdyPuBV64bfQNN1PjbCzkIM6qRdKBoLPXmKKMiFYnkd6rAoprih3/PrQEB/VsW8OoM8fxn67UDYuyBTqA23MML9q1+ilIZwBC2AQ2UBVOrFXfFl75p6/B5KsiNG9zpgmLCUYuLkxpLQIDAQAB" />
+			<feature name="Alipay">
+				<param name="android-package" value="com.justep.cordova.plugin.alipay.Alipay" />
+				<param name="onload" value="true" />
+			</feature>
+		</config-file>
+
+		<config-file target="AndroidManifest.xml" parent="/manifest/application">
+			<!-- alipay sdk begin -->
+			<activity android:name="com.alipay.sdk.app.H5PayActivity"
+				android:configChanges="orientation|keyboardHidden|navigation"
+				android:exported="false" android:screenOrientation="behind"
+				android:windowSoftInputMode="adjustResize|stateHidden">
+			</activity>
+			<!-- alipay sdk end -->
+		</config-file>
+	</platform>
+
+	<platform name="ios">
+		<config-file target="*-Info.plist" parent="CFBundleURLTypes">
+		    <array>
+				<dict>
+					<key>CFBundleTypeRole</key>
+					<string>Editor</string>
+					<key>CFBundleURLIconFile</key>
+					<string>icon-50@2x</string>
+					<key>CFBundleURLName</key>
+					<string>alipay</string>
+					<key>CFBundleURLSchemes</key>
+					<array>
+						<string>alipay2088811446024912</string>
+					</array>
+				</dict>
+			</array>
+		</config-file>
+	    
+	    
+		<!-- build setting header search path $(SRCROOT)/X5 -->
+		<header-file src="src/ios/CDVAlipay.h" />
+		<source-file src="src/ios/CDVAlipay.m" />
+		
+        
+		<config-file target="config.xml" parent="/*">
+			
+            
+			<feature name="Alipay">
+				<param name="ios-package" value="CDVAlipay" />
+				<param name="onload" value="true" />
+			</feature>
+		</config-file>
+		
+		<!-- 手动copy framework bundle 文件 -->
+		
+		<!-- afnetworking 依赖security.framework -->
+        <framework src="Security.framework"/>
+        <framework src="SystemConfiguration.framework"/>
+        <framework src="AssetsLibrary.framework"/>
+        
+        <framework src="src/ios/AlipaySDK.framework" custom="true" />
+	</platform>
+</plugin>
