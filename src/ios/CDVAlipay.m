@@ -7,8 +7,6 @@
 //
 
 #import "CDVAlipay.h"
-#import "AlipayOrder.h"
-#import "DataSigner.h"
 #import <AlipaySDK/AlipaySDK.h>
 
 @implementation CDVAlipay
@@ -51,10 +49,8 @@
 - (void)pay:(CDVInvokedUrlCommand*)command{
     [self prepareForExec:command];
     NSString *orderString = [command.arguments objectAtIndex:0];
-    
-    
     //将签名成功字符串格式化为订单字符串,请严格按照该格式
-    if (signedString != nil) {
+    if (orderString != nil) {
         NSLog(@"orderString = %@",orderString);
         [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
             NSLog(@"reslut = %@",resultDic);
