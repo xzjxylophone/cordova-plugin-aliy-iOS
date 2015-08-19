@@ -52,7 +52,7 @@
     //将签名成功字符串格式化为订单字符串,请严格按照该格式
     if (orderString != nil) {
         NSLog(@"orderString = %@",orderString);
-        [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
+        [[AlipaySDK defaultService] payOrder:orderString fromScheme:@"alipay2088811743910398" callback:^(NSDictionary *resultDic) {
             NSLog(@"reslut = %@",resultDic);
             CDVPluginResult* result = [CDVPluginResult resultWithStatus: CDVCommandStatus_OK messageAsString:[NSString stringWithFormat:@"%@",resultDic[@"resultStatus"]]];
             [self.commandDelegate sendPluginResult:result callbackId:self.currentCallbackId];
